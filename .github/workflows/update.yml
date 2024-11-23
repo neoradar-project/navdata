@@ -51,9 +51,9 @@ jobs:
       - name: Update version.yml
         run: |
           run_number=$(echo ${{github.run_id}})
-          yq eval ".versionId = \"$run_number\"" version.yml -i -o y
           today=$(date +'%Y-%m-%d')
-          yq eval ".lastUpdated = \"$today\"" version.yml -i -o y
+          yq -i ".versionId = \"$run_number\"" version.yml
+          yq -i ".lastUpdated = \"$today\"" version.yml
 
       - name: Commit and push changes
         run: |
