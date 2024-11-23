@@ -33,13 +33,17 @@ jobs:
         id: check_changes
         run: |
           git fetch
-          if git diff --exit-code navdata.db; then
-            echo "No changes detected" > no_changes
+          if ! git diff --quiet navdata.db; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Stop job if no changes
-        if: steps.check_changes.outputs.no_changes
-        run: echo "No changes to commit"
+        if: steps.check_changes.outputs.changes == 'false'
+        run: |
+          echo "No changes to commit"
+          exit 0
 
       - name: Update version.yml
         run: |
