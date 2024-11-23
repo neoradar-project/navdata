@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install sqlite3
 
       - name: Update source data
-        run: cd ourairports-data && git pull origin master
+        run: cd ourairports-data && git pull origin main
 
       - name: Run compile script
         run: ./compile.sh
