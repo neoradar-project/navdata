@@ -7,7 +7,7 @@ on:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     permissions:                # Job-level permissions configuration starts here
       contents: write           # 'write' access to repository contents
 
@@ -19,16 +19,9 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
           submodules: true
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install yq
-          sudo apt-get install sqlite3
+          brew install sqlite yq
 
       - name: Update source data
         run: cd ourairports-data && git pull origin main
