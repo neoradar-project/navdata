@@ -1,3 +1,4 @@
+rm ./navdata.db
 cd ourairports-data
 sqlite3 ../navdata.db <<EOS
 .mode csv
